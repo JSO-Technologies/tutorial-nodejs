@@ -1,11 +1,7 @@
-var ls = require('./ls')
+var http = require('http');
 
-ls(process.argv[2], process.argv[3], function (err, list) {
-    if (err) {
-        return console.error('There was an error:', err)
-    }
-
-    list.forEach(function (file) {
-        console.log(file);
-    });
+http.get(process.argv[2], function (response) {
+    response.setEncoding('utf8')
+    response.on('data', console.log)
+    response.on('error', console.error)
 });
