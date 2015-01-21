@@ -1,30 +1,11 @@
-var fs = require('fs');
-var dirPath = process.argv[2];
-var filter = process.argv[3];
+var ls = require('./ls')
 
-String.prototype.endsWith = function(endStr) {
-    return this.indexOf(endStr, this.length - endStr.length) !== -1;
-}
+ls(process.argv[2], process.argv[3], function (err, list) {
+    if (err) {
+        return console.error('There was an error:', err)
+    }
 
-fs.readdir(dirPath, function(err, list) {
-    var extension = '.' + filter;
-
-    list.forEach(function(dir) {
-        if(dir.endsWith(extension)) {
-            console.log(dir);
-        }
+    list.forEach(function (file) {
+        console.log(file);
     });
 });
-
-/*
-// Official Response
-var fs = require('fs')
-var path = require('path')
-
-fs.readdir(process.argv[2], function (err, list) {
-    list.forEach(function (file) {
-        if (path.extname(file) === '.' + process.argv[3])
-            console.log(file)
-    })
-})
-$/
