@@ -2,10 +2,11 @@
 
 -------------------------------------------------------------------------------
 
-BABY STEPS
- Exercise 2 of 13
+ MY FIRST I/O!
+ Exercise 3 of 13
 
-Write a program that accepts one or more numbers as command-line arguments and prints the sum of those numbers to the console (stdout).
+Write a program that uses a single synchronous filesystem operation to read a file and print the number of newlines it contains to the console (stdout), similar to running cat file | wc -l.
+
+The full path to the file to read will be provided as the first command-line argument.
 
 -------------------------------------------------------------------------------
-

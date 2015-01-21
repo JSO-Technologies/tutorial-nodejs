@@ -1,10 +1,6 @@
-var index = 2;
-var sum = 0;
-var numToAdd;
+var fs = require('fs');
 
-while (numToAdd = process.argv[index]) {
-    sum += parseInt(numToAdd) || 0;
-    index++;
-}
+var filePath = process.argv[2];
 
-console.log(sum);
+var nbLine = fs.readFileSync(filePath).toString().split('\n').length - 1;
+console.log(nbLine);
