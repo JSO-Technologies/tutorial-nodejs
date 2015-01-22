@@ -2,11 +2,17 @@
 
 -------------------------------------------------------------------------------
 
- JUGGLING ASYNC
- Exercise 9 of 13
+ TIME SERVER
+ Exercise 10 of 13
 
-This problem is the same as the previous problem (HTTP COLLECT) in that you need to use http.get(). However, this time you will be provided with three URLs as the first three command-line arguments.
+Write a TCP time server!
 
-You must collect the complete content provided to you by each of the URLs and print it to the console (stdout). You don't need to print out the length, just the data as a String; one line per URL. The catch is that you must print them out in the same order as the URLs are provided to you as command-line arguments.
+Your server should listen to TCP connections on the port provided by the first argument to your program. For each connection you must write the current date & 24 hour time in the format:
+
+    "YYYY-MM-DD hh:mm"
+
+followed by a newline character. Month, day, hour and minute must be zero-filled to 2 integers. For example:
+
+    "2013-07-06 17:42"
 
 -------------------------------------------------------------------------------
