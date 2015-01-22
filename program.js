@@ -1,35 +1,46 @@
+var printer = require('./printer');
+var http = require('http');
+
+var self = this;
+var getAndPrintHttpResource = function(url, callback) {
+    http.get(url, function(response) {
+        printer.printHttpResponse(response, callback);
+    });
+};
+
+getAndPrintHttpResource(process.argv[2],
+    getAndPrintHttpResource.bind(self, process.argv[3],
+        getAndPrintHttpResource.bind(self, process.argv[4])));
+
 /**
- * First version, without third party libs
+ Official response
  */
 /*
-var http = require('http');
-var responseData = '';
+var http = require('http')
+var bl = require('bl')
+var results = []
+var count = 0
 
-http.get(process.argv[2], function (response) {
-    response.setEncoding('utf8')
-    response.on('data', function(data) {
-        responseData += data.toString();
-    });
-    response.on('end', function() {
-        console.log(responseData.length);
-        console.log(responseData);
+function printResults () {
+    for (var i = 0; i < 3; i++)
+        console.log(results[i])
+}
+
+function httpGet (index) {
+    http.get(process.argv[2 + index], function (response) {
+        response.pipe(bl(function (err, data) {
+            if (err)
+                return console.error(err)
+
+            results[index] = data.toString()
+            count++
+
+            if (count == 3)
+                printResults()
+        }))
     })
-    response.on('error', console.error)
-});
+}
+
+for (var i = 0; i < 3; i++)
+    httpGet(i)
 */
-
-/**
- * Second version, with bl lib
- */
-var bl = require('bl');
-var http = require('http');
-
-http.get(process.argv[2], function(response) {
-    response.pipe(bl(function(err, data) {
-        if(err) {
-            return console.error('An error occured : ' + err);
-        }
-        console.log(data.length);
-        console.log(data.toString());
-    }));
-});
